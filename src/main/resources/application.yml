@@ -1,0 +1,25 @@
+server:
+  port: 8090
+
+#We are proxying to our resource server Fans.
+
+#All requests from the UI that starts with ?/fans/? will be routed to our
+#Fans Resource server at http://loclahost:8081/spring-zuul-fans-resource/fans/
+zuul:
+  routes:
+    foos:
+      path: /fans/**
+      url: http://localhost:8081/spring-zuul-fans-resource/fans
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:book-db
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
